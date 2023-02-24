@@ -1,4 +1,5 @@
 import { useState } from "react"
+import Todo from "./Todo";
 
 export default function ListaTareas() {
     const [titulo, setTitulo] = useState('Hola');
@@ -45,8 +46,8 @@ export default function ListaTareas() {
         <div className="TodasLasTareas">
             {
             todosTitulo.map((item) => (
+                <Todo key={item.id} item={item}/>
 
-                <div key={item.id}>{item.titulo}</div>
             ))}
 
         </div>
