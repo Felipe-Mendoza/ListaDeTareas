@@ -5,10 +5,6 @@ export default function ListaTareas() {
     const [titulo, setTitulo] = useState('Hola');
     const [todosTitulo, setTodosTitulo] = useState([])
 
-     function handleClick(e) {
-         e.preventDefault();
-         setTitulo("Marco");
-     }
     function handleChange(e) {
 
         const value = e.target.value
@@ -30,28 +26,36 @@ export default function ListaTareas() {
 
     }
 
+    function handleUpdate(id, value) {
+        const temp = [...todosTitulo]
+        const item = temp.find(item => item.id === id)
+        item.titulo = value
+        setTodosTitulo(temp)
+
+    }
+
     return (
-    <div className="TodoContainer">
-        <form className="Container" onSubmit={handleSubmit}>
-            <input onChange={handleChange} className="Formulario" value={titulo} />
-            <input
-                onClick={handleSubmit}
-                className="boton"
-                type="submit"
-                value="Agregar"
-                 />
+        <div className="TodoContainer">
+            <form className="Container" onSubmit={handleSubmit}>
+                <input onChange={handleChange} className="Formulario" value={titulo} />
+                <input
+                    onClick={handleSubmit}
+                    className="boton"
+                    type="submit"
+                    value="Agregar"
+                />
 
-        </form>
+            </form>
 
-        <div className="TodasLasTareas">
-            {
-            todosTitulo.map((item) => (
-                <Todo key={item.id} item={item}/>
+            <div className="TodasLasTareas">
+                {
+                    todosTitulo.map((item) => (
+                        <Todo key={item.id} item={item} onUpdate={handleUpdate} />
 
-            ))}
+                    ))}
+
+            </div>
 
         </div>
-
-    </div>
     );
 }
